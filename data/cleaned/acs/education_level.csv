@@ -1,4 +1,4 @@
-GEOID,town_name,pct_bachelors_or_higher,pct_bachelors_or_higher_moe,bachelors_or_higher,bachelors_or_higher_moe,total_population,total_population_moe
+GEOID,town_name,pct_bachelors_or_higher,pct_bachelors_or_higher_moe,bachelors_or_higher,bachelors_or_higher_moe,total_population_25+,total_population_25+_moe
 5000100325,Addison town,40.201567749160134,8.576477396596806,359,60.753600716336145,893,116
 5000108575,Bridport town,34.825327510917035,9.700377240954413,319,76.249590162833,916,131
 5000109025,Bristol town,41.88006482982172,7.705230892214633,1292,227.05505940189926,3085,168

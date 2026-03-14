@@ -1,4 +1,4 @@
-GEOID,town_name,pct_renter_occupied,pct_renter_occupied_moe,renter_occupied,renter_occupied_moe,total_occupied,total_occupied_moe
+GEOID,town_name,pct_renter_occupied,pct_renter_occupied_moe,renter_occupied,renter_occupied_moe,occupied_housing_units,occupied_housing_units_moe
 5000100325,Addison town,10.816326530612246,5.260227016158163,53,25,490,58
 5000108575,Bridport town,17.92452830188679,9.354012129854047,95,47,530,88
 5000109025,Bristol town,28.694250403009136,8.033231964280235,534,144,1861,140

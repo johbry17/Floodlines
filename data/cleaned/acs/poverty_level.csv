@@ -1,4 +1,4 @@
-GEOID,town_name,pct_below_poverty,pct_below_poverty_moe,below_poverty_total,below_poverty_total_moe,total_population,total_population_moe
+GEOID,town_name,pct_below_poverty,pct_below_poverty_moe,below_poverty_total,below_poverty_total_moe,poverty_universe_population,poverty_universe_population_moe
 5000100325,Addison town,4.51063829787234,3.394276543403608,53,39,1175,185
 5000108575,Bridport town,4.4189852700491,3.835924478854466,54,46,1222,204
 5000109025,Bristol town,10.08515167642363,5.482154168952672,379,206,3758,28

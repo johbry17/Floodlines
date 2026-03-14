@@ -1,4 +1,4 @@
-GEOID,town_name,percent_with_disability,percent_with_disability_moe,with_disability,with_disability_moe,total_population,total_population_moe
+GEOID,town_name,percent_with_disability,percent_with_disability_moe,with_disability,with_disability_moe,civilian_noninstitutionalized_population,civilian_noninstitutionalized_population_moe
 5000100325,Addison town,11.063829787234042,3.756212908335365,130,39.102429592034305,1175,185
 5000108575,Bridport town,13.360323886639677,5.285432984596836,165,59.312730505347666,1235,204
 5000109025,Bristol town,18.706758914316126,6.606141765119386,703,248.20354550247666,3758,28
