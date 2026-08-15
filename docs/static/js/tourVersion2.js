@@ -422,7 +422,7 @@
         "<br><br>",
         "Floodlines asks whether FEMA mitigation funding is keeping pace with where flood risk and vulnerability may be greatest across Vermont.",
         "<br><br>",
-        "<em>About 90 seconds. No clicking required.</em>",
+        "<em>About two minutes. No clicking required.</em>",
       ].join(""),
       buttons: [
         {
@@ -470,7 +470,7 @@
         }),
       when: {
         show: () => {
-          _tourTimeout("question", () => _nextStep("question"), 7000);
+          _tourTimeout("question", () => _nextStep("question"), 10000);
         },
       },
     });
@@ -493,7 +493,7 @@
       when: {
         show: () => {
           switchChoropleth("Combined Need").then(() => {
-            _tourTimeout("need", () => _nextStep("need"), 5000);
+            _tourTimeout("need", () => _nextStep("need"), 7000);
           });
         },
       },
@@ -516,7 +516,7 @@
       when: {
         show: () => {
           switchChoropleth("Mitigation Funding").then(() => {
-            _tourTimeout("funding-map", () => _nextStep("funding-map"), 5000);
+            _tourTimeout("funding-map", () => _nextStep("funding-map"), 7000);
           });
         },
       },
@@ -547,6 +547,11 @@
           _tourTimeout(
             "gap",
             async () => {
+              await _scrollTo(quadrantEl);
+
+              if (tourCancelled || window.tour?.getCurrentStep()?.id !== "gap")
+                return;
+
               await switchChoropleth("Quadrants");
 
               if (tourCancelled || window.tour?.getCurrentStep()?.id !== "gap")
@@ -558,10 +563,10 @@
                   text: "But a gap alone doesn't tell us the whole story. The <strong>Quadrant Analysis</strong> puts need and investment into the same frame — revealing where they're aligned, and where they diverge.",
                 });
             },
-            4000,
+            6000,
           );
 
-          _tourTimeout("gap", () => _nextStep("gap"), 9000);
+          _tourTimeout("gap", () => _nextStep("gap"), 12000);
         },
       },
     });
@@ -586,13 +591,9 @@
         "<br><br>",
         "The map isn't predicting which town will flood next. It's asking a simpler question: <strong>which places might deserve a closer look before the next disaster?</strong>",
       ].join(""),
-      beforeShowPromise: () => {
-        _scrollTo(quadrantEl);
-        return _delay(400);
-      },
       when: {
         show: () => {
-          _tourTimeout("proactive", () => _nextStep("proactive"), 7000);
+          _tourTimeout("proactive", () => _nextStep("proactive"), 15000);
         },
       },
     });
@@ -637,7 +638,7 @@
                   ].join(""),
                 });
             },
-            1500,
+            5000,
           );
 
           // Switch to Risk per Person; map changes
@@ -662,7 +663,7 @@
                   ].join(""),
                 });
             },
-            5000,
+            12000,
           );
 
           // Switch to FEMA Risk Index; map changes again
@@ -687,10 +688,10 @@
                   ].join(""),
                 });
             },
-            9000,
+            18000,
           );
 
-          _tourTimeout("three-models", () => _nextStep("three-models"), 13000);
+          _tourTimeout("three-models", () => _nextStep("three-models"), 26000);
         },
       },
     });
@@ -743,7 +744,7 @@
                   text: "<strong>Total Risk:</strong> towns with more property and infrastructure tend to rise.",
                 });
             },
-            4000,
+            5000,
           );
 
           // Switch back to Risk per Person — watch them move again
@@ -768,7 +769,7 @@
                   ].join(""),
                 });
             },
-            9000,
+            11000,
           );
 
           // Switch back to FEMA Risk Index — bubbles move again
@@ -791,10 +792,10 @@
                   ].join(""),
                 });
             },
-            14000,
+            17000,
           );
 
-          _tourTimeout("scatterplot", () => _nextStep("scatterplot"), 18000);
+          _tourTimeout("scatterplot", () => _nextStep("scatterplot"), 24000);
         },
       },
     });
@@ -848,7 +849,7 @@
                   ].join(""),
                 });
             },
-            4000,
+            6000,
           );
 
           // Transition to Quadrants — synthesis and institutional framing
@@ -869,10 +870,10 @@
                   ].join(""),
                 });
             },
-            8000,
+            11000,
           );
 
-          _tourTimeout("reactive", () => _nextStep("reactive"), 13000);
+          _tourTimeout("reactive", () => _nextStep("reactive"), 26000);
         },
       },
     });
