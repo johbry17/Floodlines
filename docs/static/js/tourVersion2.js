@@ -432,6 +432,7 @@
         },
         {
           text: "Show me",
+          classes: "shepherd-button-primary",
           action: () => {
             _addInteractionBlocker(); // blocker is now active for steps 1–8
             tour.next();
