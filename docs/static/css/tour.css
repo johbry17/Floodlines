@@ -1,167 +1,88 @@
-/* AI-generated CSS !!!! Thank you, Claude */
-
 /* =============================================================================
-   Floodlines Tour — Stylesheet
-   Covers: welcome modal, Shepherd step overrides, highlight overlay,
-           error banner, restart button.
-   The structural position/display rules for #fl-tour-highlight and
-   #fl-tour-welcome-modal are injected by tour.js to guarantee they are
-   present even if this stylesheet fails to load.
+   Floodlines Guided Tour
+   Shepherd overrides + persistent "Take tour" button + load error
    ============================================================================= */
 
-/* ── Welcome modal card ────────────────────────────────────────────────────── */
-.fl-tour-modal-card {
-  background: #ffffff;
-  border-radius: 10px;
-  border-top: 4px solid #0085a1;   /* accent stripe so the card reads against dark overlay */
-  padding: 30px 34px 26px;
-  max-width: 520px;
-  width: calc(100% - 32px);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.08),    /* hairline edge */
-    0 8px 24px rgba(0,0,0,0.30),   /* main lift */
-    0 24px 64px rgba(0,0,0,0.22);  /* ambient depth */
-  font-family: inherit;
-}
+/* ── Shepherd card ─────────────────────────────────────────────────────────── */
 
-.fl-tour-modal-header h2 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #0d1a2e;
+.shepherd-element.shepherd-floodlines {
+  width: min(480px, calc(100vw - 24px));
 }
-
-.fl-tour-modal-body p {
-  margin: 0 0 10px 0;
-  color: #3a3a3a;
-  line-height: 1.6;
-  font-size: 1rem;
-}
-.fl-tour-modal-body p:last-child { margin-bottom: 0; }
-
-.fl-tour-modal-footer {
-  margin-top: 22px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-/* ── Shared button style ───────────────────────────────────────────────────── */
-.fl-tour-btn {
-  display: inline-block;
-  padding: 8px 18px;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: background 150ms, color 150ms, opacity 150ms;
-  line-height: 1.4;
-  font-family: inherit;
-}
-.fl-tour-btn-primary {
-  background: #0085a1;
-  color: #fff;
-}
-.fl-tour-btn-primary:hover  { background: #00a8cc; }
-.fl-tour-btn-primary:focus  { outline: 3px solid rgba(26,111,189,0.45); outline-offset: 2px; }
-.fl-tour-btn-ghost {
-  background: transparent;
-  color: #555;
-  border: 1px solid #d0d0d0;
-}
-.fl-tour-btn-ghost:hover  { background: #f4f4f4; }
-
-/* ── Restart button injected in nav ───────────────────────────────────────── */
-.fl-tour-restart-btn {
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  opacity: 0.75;
-  padding: 4px 8px;
-  transition: opacity 150ms;
-}
-.fl-tour-restart-btn:hover { opacity: 1; }
-
-/* ── Error banner ─────────────────────────────────────────────────────────── */
-#fl-tour-error {
-  margin: 10px 0;
-  padding: 10px 14px;
-  background: #fff5f5;
-  border: 1px solid #e8b4b4;
-  border-radius: 5px;
-  font-size: 0.88rem;
-  color: #555;
-}
-#fl-tour-error .fl-tour-error-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-#fl-tour-retry {
-  padding: 4px 12px;
-  background: #0085a1;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.88rem;
-  cursor: pointer;
-}
-
-/* ── Shepherd step overrides ─────────────────────────────────────────────── */
-
-.shepherd-floodlines.shepherd-has-cancel-icon .shepherd-cancel-icon {
-  font-size: 1.1rem;
-  opacity: 0.55;
-  transition: opacity 120ms;
-}
-.shepherd-floodlines.shepherd-has-cancel-icon .shepherd-cancel-icon:hover { opacity: 1; }
 
 .shepherd-floodlines .shepherd-header {
-  padding: 16px 20px 0 20px;
-  flex-wrap: wrap;          /* allow long titles to wrap on mobile */
-  align-items: flex-start;  /* keep cancel icon top-aligned when title wraps */
+  padding: 16px 20px 0;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding-top: 0px; /* remove weird extra padding at the top of the header */
 }
+
 .shepherd-floodlines .shepherd-title {
   font-size: 1.25rem;
   font-weight: 700;
   color: #111;
   line-height: 1.3;
-  white-space: normal;      /* allow wrapping */
+  white-space: normal;
   overflow-wrap: break-word;
-  word-break: normal;       /* don't break mid-word unless necessary */
+  word-break: normal;
   flex: 1 1 auto;
   min-width: 0;
 }
-/* Responsive max-width: never wider than the viewport on small screens */
-.shepherd-element.shepherd-floodlines {
-  max-width: min(460px, calc(100vw - 24px));
-}
+
 .shepherd-floodlines .shepherd-text {
-  padding: 10px 20px 14px 20px;
+  padding: 10px 20px 14px;
   font-size: 1.15rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: #333;
 }
+
 .shepherd-floodlines .shepherd-text p {
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
 }
-.shepherd-floodlines .shepherd-text p:last-child { margin-bottom: 0; }
+
+.shepherd-floodlines .shepherd-text p:last-child {
+  margin-bottom: 0;
+}
+
+.shepherd-floodlines .shepherd-text strong {
+  font-weight: 700;
+}
+
+.shepherd-floodlines .shepherd-text em {
+  font-style: italic;
+}
+
 .shepherd-floodlines .shepherd-text a {
   color: #0085a1;
   text-decoration: underline;
 }
-.shepherd-floodlines .shepherd-text strong { color: #111; }
-.shepherd-floodlines .shepherd-text em     { color: #444; }
+
+/* ── Cancel ───────────────────────────────────────────────────────────────── */
+
+.shepherd-floodlines.shepherd-has-cancel-icon .shepherd-cancel-icon {
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0.55;
+  transition: opacity 120ms;
+}
+
+.shepherd-floodlines.shepherd-has-cancel-icon .shepherd-cancel-icon:hover {
+  opacity: 1;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
 
 .shepherd-floodlines .shepherd-footer {
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 16px;
   display: flex;
   gap: 8px;
   justify-content: flex-end;
 }
+
+/* ── Buttons ───────────────────────────────────────────────────────────────── */
 
 .shepherd-floodlines .shepherd-button-primary {
   background: #0085a1 !important;
@@ -174,7 +95,10 @@
   transition: background 140ms !important;
   cursor: pointer !important;
 }
-.shepherd-floodlines .shepherd-button-primary:hover { background: #00a8cc !important; }
+
+.shepherd-floodlines .shepherd-button-primary:hover {
+  background: #00a8cc !important;
+}
 
 .shepherd-floodlines .shepherd-button-secondary {
   background: transparent !important;
@@ -187,29 +111,74 @@
   transition: background 140ms !important;
   cursor: pointer !important;
 }
-.shepherd-floodlines .shepherd-button-secondary:hover { background: #f4f4f4 !important; }
 
-.shepherd-modal-overlay-container .shepherd-modal-overlay {
-  opacity: 0.5;
+.shepherd-floodlines .shepherd-button-secondary:hover {
+  background: #f4f4f4 !important;
 }
 
-/* ── Floating highlight ring ─────────────────────────────────────────────── */
-#fl-tour-highlight {
-  border: 2.5px solid #f5a623;
-  border-radius: 7px;
-  box-shadow: 0 0 0 2000px rgba(0,0,0,0.20), 0 0 0 3px rgba(245,166,35,0.28);
+.shepherd-floodlines .shepherd-button-primary:focus-visible,
+.shepherd-floodlines .shepherd-button-secondary:focus-visible {
+  outline: 3px solid rgba(0, 133, 161, 0.35);
+  outline-offset: 2px;
 }
 
-/* ── Mobile adjustments ──────────────────────────────────────────────────── */
+/* ── Persistent navbar button ─────────────────────────────────────────────── */
+
+.fl-tour-restart-btn {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+  padding: 4px 8px;
+  transition: opacity 150ms;
+}
+
+.fl-tour-restart-btn:hover {
+  opacity: 1;
+}
+
+/* ── Load error ───────────────────────────────────────────────────────────── */
+
+#fl-tour-error {
+  margin: 10px 0;
+  padding: 10px 14px;
+  background: #fff5f5;
+  border: 1px solid #e8b4b4;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  color: #555;
+}
+
+#fl-tour-error .fl-tour-error-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#fl-tour-retry {
+  padding: 4px 12px;
+  background: #0085a1;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────────────── */
+
 @media (max-width: 640px) {
-  .fl-tour-modal-card {
-    padding: 22px 18px 18px;
-    border-radius: 8px;
+  .shepherd-element.shepherd-floodlines {
+    width: calc(100vw - 24px);
   }
-  .fl-tour-modal-header h2 { font-size: 1.1rem; }
-  .fl-tour-modal-footer { flex-direction: column; }
-  .fl-tour-btn { width: 100%; text-align: center; }
 
-  .shepherd-floodlines .shepherd-text  { font-size: 1.05rem; }
-  .shepherd-floodlines .shepherd-title { font-size: 1.15rem; }
+  .shepherd-floodlines .shepherd-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .shepherd-floodlines .shepherd-title {
+    font-size: 1.15rem;
+  }
 }
