@@ -343,7 +343,7 @@
   // remain fully accessible while the blocker is active.
   //
   // The blocker is NOT active during step 0 (user must opt in) and is removed
-  // before step 9 (synthesis) so the user can interact freely after the story ends.
+  // during step 9 (synthesis) so the user can interact freely after the story ends.
 
   function _addInteractionBlocker() {
     if (interactionBlocker) return;
@@ -428,9 +428,7 @@
         {
           text: "I'll explore",
           classes: "shepherd-button-secondary",
-          action: () => {
-            tour.complete();
-          },
+          action: _dismissTour,
         },
         {
           text: "Show me",
@@ -466,7 +464,8 @@
       ].join(""),
       beforeShowPromise: () =>
         resetDashboard().then(() => {
-          _scrollTo(choroplethEl); // map vertically centers better with scrollTo choroplethEl
+          // Map vertically centers better with scrollTo choroplethEl
+          _scrollTo(choroplethEl);
           return _delay(400);
         }),
       when: {
@@ -493,8 +492,9 @@
       text: "<strong>Need</strong> combines two questions: where could flooding cause serious damage, and who would have the hardest time recovering?",
       when: {
         show: () => {
-          switchChoropleth("Combined Need");
-          _tourTimeout("need", () => _nextStep("need"), 5000);
+          switchChoropleth("Combined Need").then(() => {
+            _tourTimeout("need", () => _nextStep("need"), 5000);
+          });
         },
       },
     });
@@ -515,8 +515,9 @@
       text: "<strong>Funding</strong> shows where FEMA mitigation investment has actually gone — grants obligated since 1990, adjusted for inflation.",
       when: {
         show: () => {
-          switchChoropleth("Mitigation Funding");
-          _tourTimeout("funding-map", () => _nextStep("funding-map"), 5000);
+          switchChoropleth("Mitigation Funding").then(() => {
+            _tourTimeout("funding-map", () => _nextStep("funding-map"), 5000);
+          });
         },
       },
     });
@@ -545,8 +546,12 @@
           // Phase 2: Quadrants synthesize the three concepts
           _tourTimeout(
             "gap",
-            () => {
-              switchChoropleth("Quadrants");
+            async () => {
+              await switchChoropleth("Quadrants");
+
+              if (tourCancelled || window.tour?.getCurrentStep()?.id !== "gap")
+                return;
+
               const step = window.tour?.getById("gap");
               if (step)
                 step.updateStepOptions({
@@ -609,11 +614,11 @@
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
       text: "<strong>But even that question depends on how we define risk.</strong>",
-      beforeShowPromise: () => {
-        switchChoropleth("Funding Gap");
-        _scrollTo(modelSelectorEl);
-        return _delay(400);
-      },
+      beforeShowPromise: () =>
+        switchChoropleth("Funding Gap").then(() => {
+          _scrollTo(modelSelectorEl);
+          return _delay(400);
+        }),
       when: {
         show: () => {
           // Start from Total Risk; let map settle before explaining
@@ -621,7 +626,7 @@
 
           _tourTimeout(
             "three-models",
-            () => {
+            async () => {
               const step = window.tour?.getById("three-models");
               if (step)
                 step.updateStepOptions({
@@ -638,8 +643,15 @@
           // Switch to Risk per Person; map changes
           _tourTimeout(
             "three-models",
-            () => {
-              switchPrimaryModel("Risk per Person");
+            async () => {
+              await switchPrimaryModel("Risk per Person");
+
+              if (
+                tourCancelled ||
+                window.tour?.getCurrentStep()?.id !== "three-models"
+              )
+                return;
+
               const step = window.tour?.getById("three-models");
               if (step)
                 step.updateStepOptions({
@@ -656,8 +668,15 @@
           // Switch to FEMA Risk Index; map changes again
           _tourTimeout(
             "three-models",
-            () => {
-              switchPrimaryModel("FEMA Risk Index");
+            async () => {
+              await switchPrimaryModel("FEMA Risk Index");
+
+              if (
+                tourCancelled ||
+                window.tour?.getCurrentStep()?.id !== "three-models"
+              )
+                return;
+
               const step = window.tour?.getById("three-models");
               if (step)
                 step.updateStepOptions({
@@ -709,8 +728,15 @@
           // Switch secondary model to Total Risk — bubbles move
           _tourTimeout(
             "scatterplot",
-            () => {
-              switchSecondaryModel("Total Risk");
+            async () => {
+              await switchSecondaryModel("Total Risk");
+
+              if (
+                tourCancelled ||
+                window.tour?.getCurrentStep()?.id !== "scatterplot"
+              )
+                return;
+
               const step = window.tour?.getById("scatterplot");
               if (step)
                 step.updateStepOptions({
@@ -723,8 +749,15 @@
           // Switch back to Risk per Person — watch them move again
           _tourTimeout(
             "scatterplot",
-            () => {
-              switchSecondaryModel("Risk per Person");
+            async () => {
+              await switchSecondaryModel("Risk per Person");
+
+              if (
+                tourCancelled ||
+                window.tour?.getCurrentStep()?.id !== "scatterplot"
+              )
+                return;
+
               const step = window.tour?.getById("scatterplot");
               if (step)
                 step.updateStepOptions({
@@ -738,11 +771,18 @@
             9000,
           );
 
-          // Swtich back to FEMA Risk Index — bubbles move again
+          // Switch back to FEMA Risk Index — bubbles move again
           _tourTimeout(
             "scatterplot",
-            () => {
-              switchSecondaryModel("FEMA Risk Index");
+            async () => {
+              await switchSecondaryModel("FEMA Risk Index");
+
+              if (
+                tourCancelled ||
+                window.tour?.getCurrentStep()?.id !== "scatterplot"
+              )
+                return;
+
               const step = window.tour?.getById("scatterplot");
               if (step)
                 step.updateStepOptions({
@@ -776,20 +816,28 @@
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
       text: "National Flood Insurance Program <strong>claims</strong> give us the historical record: where insured flood losses have already occurred.",
-      beforeShowPromise: () => {
-        _scrollTo(choroplethEl);
-        switchPrimaryModel("Risk per Person"); // reset; FEMA Risk Index disables the Flood Risk overlay
-        return _delay(300);
-      },
+      beforeShowPromise: () =>
+        // reset model; FEMA Risk Index disables Flood Risk overlay
+        switchPrimaryModel("Risk per Person").then(() => {
+          _scrollTo(choroplethEl);
+          return _delay(300);
+        }),
       when: {
-        show: () => {
-          switchChoropleth("NFIP Claims");
+        show: async () => {
+          await switchChoropleth("NFIP Claims");
 
           // Transition to Flood Risk — forward-looking contrast
           _tourTimeout(
             "reactive",
-            () => {
-              switchChoropleth("Flood Risk");
+            async () => {
+              await switchChoropleth("Flood Risk");
+
+              if (
+                tourCancelled ||
+                window.tour?.getCurrentStep()?.id !== "reactive"
+              )
+                return;
+
               const step = window.tour?.getById("reactive");
               if (step)
                 step.updateStepOptions({
@@ -853,8 +901,8 @@
         "<em>Where could we act before the next disaster statistics arrive?</em>",
       ].join(""),
       beforeShowPromise: () =>
+        // reset the dashboard to canonical state (Quadrants, Risk per Person, Vermont-wide) so the user can explore freely
         resetDashboard().then(() => {
-          switchChoropleth("Quadrants");
           return _delay(400);
         }),
       when: {
@@ -878,10 +926,13 @@
     ///////////////////////////////////////////////////////////////////////////
     // Cancel / complete handlers
     //
-    // Both paths clean up all tour artifacts (timers, blocker) and reset the
-    // dashboard to canonical state. resetDashboard() is safe to call multiple
+    // Cancel and complete paths clean up all tour artifacts (timers, blocker) and reset
+    // the dashboard to canonical state. resetDashboard() is safe to call multiple
     // times — if step 9's beforeShowPromise already ran it, calling again is a
     // no-op on an already-canonical dashboard.
+    //
+    // _dismissTour() is a special case: it cancels the tour without resetting the dashboard,
+    // so the user can explore in whatever state they left it. For step 0.
 
     // Fires when user clicks X, or when restartTour() calls tour.cancel().
     tour.on("cancel", () => {
@@ -891,12 +942,19 @@
       window.tour = null;
     });
 
-    // Fires on normal completion ("I'll explore" at step 0 or "Explore" at step 9).
+    // Fires on normal completion ("Explore" at step 9).
     tour.on("complete", () => {
       _cleanupTourState();
       resetDashboard();
       window.tour = null;
     });
+
+    // Dismisses the tour immediately without resetting the dashboard ("I'll explore" at step 0).
+    function _dismissTour() {
+      _cleanupTourState();
+      window.tour?.hide();
+      window.tour = null;
+    }
 
     tour.start();
   }
