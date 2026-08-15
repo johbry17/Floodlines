@@ -461,7 +461,7 @@
         "<br><br>",
         "Floodlines compares modeled flood risk, community vulnerability, and FEMA mitigation investment across Vermont.",
         "<br><br>",
-        "The map tells the story.",
+        "<em>The map tells the story.</em>",
       ].join(""),
       beforeShowPromise: () =>
         resetDashboard().then(() => {
@@ -490,7 +490,7 @@
       popperOptions: {
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
-      text: "<strong>Need</strong> combines two questions: where could flooding cause serious damage, and who would have the hardest time recovering?",
+      text: "<strong>Need</strong> combines two questions: where could flooding cause serious damage, and who might have the hardest time recovering?",
       when: {
         show: () => {
           switchChoropleth("Combined Need").then(() => {
@@ -561,7 +561,7 @@
               const step = window.tour?.getById("gap");
               if (step)
                 step.updateStepOptions({
-                  text: "But a gap alone doesn't tell us the whole story. The <strong>Quadrant Analysis</strong> puts need and investment into the same frame — revealing where they're aligned, and where they diverge.",
+                  text: "But a gap alone doesn't tell us the whole story. <strong>Quadrant Analysis</strong> puts need and investment into the same frame — revealing where they align, and where they diverge.",
                 });
             },
             6000,
@@ -635,7 +635,7 @@
                   text: [
                     "<strong>Total expected loss</strong> favors places with more property and infrastructure.",
                     "<br><br>",
-                    "Larger towns tend to rank higher.",
+                    "<em>Larger towns tend to rank higher.</em>",
                   ].join(""),
                 });
             },
@@ -685,7 +685,7 @@
                   text: [
                     "FEMA's own composite index produces yet another map.",
                     "<br><br>",
-                    "<strong>Same state. Same towns. Different definition of risk. Different priorities.</strong>",
+                    "<em>Same state. Same towns. Different definition of risk. Different priorities.</em>",
                   ].join(""),
                 });
             },
@@ -714,7 +714,7 @@
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
       text: [
-        "Each bubble is a Vermont town. Larger bubbles are larger populations.",
+        "Each bubble is a Vermont town. Bubble size represents population.",
         "<br><br>",
         "If funding tracked need, points would cluster along a diagonal.",
         "<br>",
@@ -789,7 +789,7 @@
               if (step)
                 step.updateStepOptions({
                   text: [
-                    "But there's another question. Are these models telling us something different from the historical record?",
+                    "But there's another question: Are these models telling us something different from the historical record?",
                   ].join(""),
                 });
             },
@@ -863,7 +863,7 @@
                   text: [
                     "<strong>Past losses and future risk tell different stories.</strong>",
                     "<br><br>",
-                    "FEMA mitigation funding is necessarily informed by where disasters and losses have occurred.",
+                    "FEMA mitigation funding is necessarily shaped by where disasters and losses have occurred.",
                     "<br><br>",
                     "Floodlines asks what becomes visible when we compare that history with forward-looking measures of risk and vulnerability.",
                     "<br><br>",
@@ -898,9 +898,9 @@
         "<br><br>",
         "Different models identify different communities. That's not a flaw — it's the point.",
         "<br><br>",
-        "These models aren't definitive rankings. They're inexpensive screening tools for finding places worth investigating further — <em>before</em> the next disaster forces the question.",
+        "These models are inexpensive screening tools for finding places worth investigating further — <em>before</em> the next disaster forces the question.",
         "<br><br>",
-        "<em>Where could we act before the next disaster statistics arrive?</em>",
+        "<strong><em>Where could we act before the next disaster statistics arrive?</em></strong>",
       ].join(""),
       beforeShowPromise: () =>
         // reset the dashboard to canonical state (Quadrants, Risk per Person, Vermont-wide) so the user can explore freely
