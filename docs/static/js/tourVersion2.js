@@ -420,7 +420,7 @@
       text: [
         "<strong>Want to see the story behind the map?</strong>",
         "<br><br>",
-        "Floodlines asks whether FEMA mitigation funding is keeping pace with where flood risk and vulnerability may be greatest across Vermont.",
+        "Floodlines asks whether FEMA mitigation funding reaches the Vermont communities where flood risk and vulnerability may be greatest.",
         "<br><br>",
         "<em>About two minutes. No clicking required.</em>",
       ].join(""),
@@ -513,7 +513,7 @@
       popperOptions: {
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
-      text: "<strong>Funding</strong> shows where FEMA mitigation investment has actually gone — grants obligated since 1990, adjusted for inflation.",
+      text: "<strong>Funding</strong> shows where FEMA hazard mitigation investment has actually gone — money awarded to reduce future flood damage since 1990, adjusted for inflation.",
       when: {
         show: () => {
           switchChoropleth("Mitigation Funding").then(() => {
@@ -561,7 +561,7 @@
               const step = window.tour?.getById("gap");
               if (step)
                 step.updateStepOptions({
-                  text: "But a gap alone doesn't tell us the whole story. <strong>Quadrant Analysis</strong> puts need and investment into the same frame — revealing where they align, and where they diverge.",
+                  text: "A gap alone doesn't tell us the whole story. The <strong>Quadrant Analysis</strong> puts both dimensions in view at once: where does need sit relative to funding? That's where the pattern becomes legible.",
                 });
             },
             6000,
@@ -588,7 +588,7 @@
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
       text: [
-        "Some <strong>underserved</strong> towns have substantial modeled need but relatively little mitigation funding. Others have <strong>no recorded FEMA mitigation investment</strong> in the dataset.",
+        "Some <strong>underserved</strong> towns have substantial modeled need but relatively little mitigation funding. Others have <strong>no recorded FEMA mitigation investment</strong> at all.",
         "<br><br>",
         "The map isn't predicting which town will flood next. It's asking a simpler question: <strong>which places might deserve a closer look before the next disaster?</strong>",
       ].join(""),
@@ -685,7 +685,7 @@
                   text: [
                     "FEMA's own composite index produces yet another map.",
                     "<br><br>",
-                    "<em>Same state. Same towns. Different definition of risk. Different priorities.</em>",
+                    "<em>Same state. Same towns. Different definition of risk. Different communities at the top.</em>",
                   ].join(""),
                 });
             },
@@ -766,7 +766,7 @@
                   text: [
                     "Adjust for population — <strong>the bubbles move.</strong>",
                     "<br><br>",
-                    "The definition of risk reshapes which communities appear most vulnerable.",
+                    "But regardless of how risk is defined, funding remains only weakly aligned with need.",
                   ].join(""),
                 });
             },
@@ -789,7 +789,7 @@
               if (step)
                 step.updateStepOptions({
                   text: [
-                    "But there's another question: Are these models telling us something different from the historical record?",
+                    "Across all three models, the pattern is the same: funding is only weakly associated with measured need. What, then, actually predicts it?",
                   ].join(""),
                 });
             },
@@ -817,7 +817,7 @@
       popperOptions: {
         modifiers: [{ name: "offset", options: { offset: [0, 16] } }],
       },
-      text: "National Flood Insurance Program <strong>claims</strong> give us the historical record: where insured flood losses have already occurred.",
+      text: "National Flood Insurance Program <strong>claims</strong> show where insured flood losses have already occurred.",
       beforeShowPromise: () =>
         // reset model; FEMA Risk Index disables Flood Risk overlay
         switchPrimaryModel("Risk per Person").then(() => {
@@ -846,7 +846,7 @@
                   text: [
                     "<strong>Risk models</strong> ask where losses <em>could</em> occur, not where they already have.",
                     "<br><br>",
-                    "The two geographies are related — but not the same.",
+                    "Past damage and projected risk trace different geographies.",
                   ].join(""),
                 });
             },
@@ -863,11 +863,9 @@
                   text: [
                     "<strong>Past losses and future risk tell different stories.</strong>",
                     "<br><br>",
-                    "FEMA mitigation funding is necessarily shaped by where disasters and losses have occurred.",
+                    "FEMA mitigation funding has been shaped largely by where disasters and losses have already occurred.",
                     "<br><br>",
-                    "Floodlines asks what becomes visible when we compare that history with forward-looking measures of risk and vulnerability.",
-                    "<br><br>",
-                    "Where might the two diverge — <strong>and what places deserve a closer look?</strong>",
+                    "That gap between institutional memory and projected risk is what Floodlines is built to surface.",
                   ].join(""),
                 });
             },
@@ -896,9 +894,9 @@
       text: [
         "<strong>Floodlines isn't trying to produce one definitive ranking of Vermont towns.</strong>",
         "<br><br>",
-        "Different models identify different communities. That's not a flaw — it's the point.",
+        "Different models identify different communities. But across all of them, the same pattern holds: funding is only weakly associated with measured need.",
         "<br><br>",
-        "These models are inexpensive screening tools for finding places worth investigating further — <em>before</em> the next disaster forces the question.",
+        "Simple tools like these can surface places worth investigating <em>before</em> the next disaster.",
         "<br><br>",
         "<strong><em>Where could we act before the next disaster statistics arrive?</em></strong>",
       ].join(""),
