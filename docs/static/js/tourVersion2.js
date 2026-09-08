@@ -619,7 +619,7 @@
       beforeShowPromise: () =>
         switchChoropleth("Funding Gap").then(() => {
           _scrollTo(modelSelectorEl);
-          return _delay(400);
+          return _delay(800);
         }),
       when: {
         show: () => {
