@@ -826,6 +826,7 @@
         }),
       when: {
         show: async () => {
+          await _delay(500); // give viewer a moment to adjust
           await switchChoropleth("NFIP Claims");
 
           // Transition to Flood Risk — forward-looking contrast
