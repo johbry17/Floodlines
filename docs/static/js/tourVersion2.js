@@ -173,10 +173,43 @@
   }
 
   function _scrollTo(el) {
-    if (!el) return;
-    try {
+    if (!el) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      // Start scrolling to the element smoothly and wait until it stabilizes.
+      let lastTop = null;
+      let stableFrames = 0;
+      const start = performance.now();
+      const maxWait = 2500;
+      const requiredStableFrames = 4;
+
       el.scrollIntoView({ behavior: "smooth", block: "end" });
-    } catch (_) {}
+
+      // Check periodically if the element has stopped moving.
+      const check = () => {
+        const top = Math.round(el.getBoundingClientRect().top);
+
+        if (top === lastTop) {
+          stableFrames++;
+        } else {
+          lastTop = top;
+          stableFrames = 0;
+        }
+
+        if (
+          stableFrames >= requiredStableFrames ||
+          performance.now() - start >= maxWait
+        ) {
+          resolve();
+          return;
+        }
+
+        requestAnimationFrame(check);
+      };
+
+      // Kick off loop
+      requestAnimationFrame(check);
+    });
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -464,9 +497,9 @@
         "<em>The map tells the story.</em>",
       ].join(""),
       beforeShowPromise: () =>
-        resetDashboard().then(() => {
+        resetDashboard().then(async () => {
           // Map vertically centers better with scrollTo choroplethEl
-          _scrollTo(choroplethEl);
+          await _scrollTo(choroplethEl);
           return _delay(400);
         }),
       when: {
@@ -617,8 +650,8 @@
       },
       text: "<strong>But even that question depends on how we define risk.</strong>",
       beforeShowPromise: () =>
-        switchChoropleth("Funding Gap").then(() => {
-          _scrollTo(modelSelectorEl);
+        switchChoropleth("Funding Gap").then(async () => {
+          await _scrollTo(modelSelectorEl);
           return _delay(400);
         }),
       when: {
@@ -721,8 +754,8 @@
         "<strong>They don't.</strong>",
       ].join(""),
       beforeShowPromise: () =>
-        switchPrimaryModel("Risk per Person").then(() => {
-          _scrollTo(plotEl);
+        switchPrimaryModel("Risk per Person").then(async () => {
+          await _scrollTo(plotEl);
           return _delay(500);
         }),
       when: {
@@ -820,8 +853,8 @@
       text: "National Flood Insurance Program <strong>claims</strong> show where insured flood losses have already occurred.",
       beforeShowPromise: () =>
         // reset model; FEMA Risk Index disables Flood Risk overlay
-        switchPrimaryModel("Risk per Person").then(() => {
-          _scrollTo(choroplethEl);
+        switchPrimaryModel("Risk per Person").then(async () => {
+          await _scrollTo(choroplethEl);
           return _delay(300);
         }),
       when: {
