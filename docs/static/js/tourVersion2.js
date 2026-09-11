@@ -623,17 +623,6 @@
         }),
       when: {
         show: () => {
-          // Keep Shepherd visible during transient mobile viewport changes.
-          // Popper's hide modifier can incorrectly mark the reference element as hidden.
-          if (window.visualViewport) {
-            window.visualViewport.addEventListener(
-              "resize",
-              function handler() {
-                window.visualViewport.removeEventListener("resize", handler);
-                window.tour?.getCurrentStep()?.popper?.update();
-              },
-            );
-          }
           // Start from Total Risk; let map settle before explaining
           switchPrimaryModel("Total Risk");
 
@@ -738,17 +727,6 @@
         }),
       when: {
         show: () => {
-          // Keep Shepherd visible during transient mobile viewport changes.
-          // Popper's hide modifier can incorrectly mark the reference element as hidden.
-          if (window.visualViewport) {
-            window.visualViewport.addEventListener(
-              "resize",
-              function handler() {
-                window.visualViewport.removeEventListener("resize", handler);
-                window.tour?.getCurrentStep()?.popper?.update();
-              },
-            );
-          }
           // Switch secondary model to Total Risk — bubbles move
           _tourTimeout(
             "scatterplot",
