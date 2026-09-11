@@ -404,6 +404,9 @@
         cancelIcon: { enabled: true },
         classes: "shepherd-floodlines",
       },
+      floatingUIOptions: {
+        modifiers: [{ name: "hide", enabled: false }],
+      },
     });
 
     window.tour = tour;
