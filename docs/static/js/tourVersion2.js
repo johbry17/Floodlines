@@ -403,11 +403,6 @@
         scrollTo: false,
         cancelIcon: { enabled: true },
         classes: "shepherd-floodlines",
-        // Keep Shepherd visible during transient mobile viewport changes.
-        // Popper's hide modifier can incorrectly mark the reference element as hidden.
-        popperOptions: {
-          modifiers: [{ name: "hide", enabled: false }],
-        },
       },
     });
 
