@@ -179,6 +179,25 @@
     } catch (_) {}
   }
 
+  // Like _scrollTo, but waits for the animation to finish before resolving.
+  // On mobile, nudges the page up so the control clears the viewport bottom.
+  function _scrollToNudge(el) {
+    if (!el) return Promise.resolve();
+    el.scrollIntoView({ behavior: "smooth", block: "end" });
+    return new Promise((resolve) => {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        if (window.innerWidth < 768) window.scrollBy({ top: 12, behavior: "instant" });
+        resolve();
+      };
+      // scrollend fires when the animation settles; fallback covers missing support.
+      document.addEventListener("scrollend", finish, { once: true });
+      setTimeout(finish, 900);
+    });
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   // Dashboard interaction helpers
   //
@@ -617,10 +636,9 @@
       },
       text: "<strong>But even that question depends on how we define risk.</strong>",
       beforeShowPromise: () =>
-        switchChoropleth("Funding Gap").then(() => {
-          _scrollTo(modelSelectorEl);
-          return _delay(400);
-        }),
+        switchChoropleth("Funding Gap").then(() =>
+          _scrollToNudge(modelSelectorEl).then(() => _delay(200))
+        ),
       when: {
         show: () => {
           // Start from Total Risk; let map settle before explaining
@@ -721,10 +739,9 @@
         "<strong>They don't.</strong>",
       ].join(""),
       beforeShowPromise: () =>
-        switchPrimaryModel("Risk per Person").then(() => {
-          _scrollTo(plotEl);
-          return _delay(500);
-        }),
+        switchPrimaryModel("Risk per Person").then(() =>
+          _scrollToNudge(plotEl).then(() => _delay(200))
+        ),
       when: {
         show: () => {
           // Switch secondary model to Total Risk — bubbles move
