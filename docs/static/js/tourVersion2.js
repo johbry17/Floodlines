@@ -189,7 +189,8 @@
       const finish = () => {
         if (done) return;
         done = true;
-        if (window.innerWidth < 768) window.scrollBy({ top: 12, behavior: "instant" });
+        if (window.innerWidth < 768)
+          window.scrollBy({ top: 12, behavior: "instant" });
         resolve();
       };
       // scrollend fires when the animation settles; fallback covers missing support.
@@ -637,7 +638,7 @@
       text: "<strong>But even that question depends on how we define risk.</strong>",
       beforeShowPromise: () =>
         switchChoropleth("Funding Gap").then(() =>
-          _scrollToNudge(modelSelectorEl).then(() => _delay(200))
+          _scrollToNudge(modelSelectorEl).then(() => _delay(200)),
         ),
       when: {
         show: () => {
@@ -740,7 +741,7 @@
       ].join(""),
       beforeShowPromise: () =>
         switchPrimaryModel("Risk per Person").then(() =>
-          _scrollToNudge(plotEl).then(() => _delay(200))
+          _scrollToNudge(plotEl).then(() => _delay(200)),
         ),
       when: {
         show: () => {
