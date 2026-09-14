@@ -5,7 +5,7 @@
 _Risk is not equally distributed. Neither is the money to address it._  
 An independent analysis of flood risk, social vulnerability, and FEMA mitigation funding across Vermont municipalities.
 
-🔗 [Live Dashboard](https://johbry17.github.io/Floodlines/)  
+🔗 [Data Story & Dashboard](https://johbry17.github.io/Floodlines/)  
 📖 [Analysis Article](https://johbry17.github.io/Floodlines/article.html)  
 <!-- 🔬 [Technical Appendix](https://johbry17.github.io/Floodlines/appendix.html)   -->
 
@@ -39,6 +39,7 @@ The analysis combines:
 - **FEMA National Risk Index (NRI)** expected annual loss and composite risk scores
 - **Index construction** using rank-based normalization across multiple model specifications, with sensitivity analysis
 - **An interactive web dashboard** visualizing risk, vulnerability, need, gap, and quadrant assignment for every Vermont town
+- **A cinematic data story** guiding users through the dashboard, showing not only what the data reveals, but why the patterns matter
 
 ## Key Findings
 
@@ -55,6 +56,7 @@ The analysis combines:
 
 **Interactive Dashboard:**
 
+- **Narrative guided tour** that walks users through the dashboard’s central question, introducing the maps, metrics, and findings in context
 - Quadrant view classifying each town as underserved, aligned, historically invested, low priority, or no recorded investment
 - Choropleth map of all Vermont towns, switchable across six metrics: flood risk, social vulnerability, need index, mitigation funding, funding gap, and NFIP claims
 - River corridor, population, and funding context overlays
