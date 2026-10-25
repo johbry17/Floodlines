@@ -45,6 +45,12 @@ The analysis combines:
 - **An interactive web dashboard** visualizing risk, vulnerability, need, gap, and quadrant assignment for every Vermont town
 - **A cinematic data story** guiding users through the dashboard, showing not only what the data reveals, but why the patterns matter
 
+### The Project at a Glance
+
+[![Floodlines — The Geography of Institutional Memory](./resources/images/Floodlines_Infographic.png)](./resources/images/Floodlines_Infographic.png)
+
+*An independent analysis of flood risk, social vulnerability, and FEMA mitigation funding across Vermont municipalities. The project examines how recorded mitigation investment aligns with modeled community need and historical insured losses.* **Click the infographic to view the full-size image.**
+
 ## Key Findings
 
 - **More than half of Vermont municipalities (~52%) received no FEMA Hazard Mitigation Assistance funding.**
@@ -116,6 +122,9 @@ _A visual metaphor for the central question explored in Floodlines: when institu
 | FEMA National Flood Hazard Layer (NFHL) | High-risk flood zone boundaries |
 | Vermont ANR River Corridors | State-defined river corridor polygons |
 | Vermont / Census town boundaries | Base geography for all aggregation |
+
+![ETL Infographic](./resources/images/etl_graphic.png)  
+_Data sources and analytical workflow used in this study. Federal hazard, insurance, demographic, and mitigation datasets are integrated at the municipal level and transformed into comparative measures of need, funding, and funding alignment._
 
 **Spatial standardization:** All datasets were projected to an equal-area coordinate system (EPSG:5070) for area calculations, then converted to WGS84 for web mapping. FEMA NRI data (census tract level) was spatially intersected with town boundaries and allocated using area-weighted proportions; sliver overlaps under 1% were removed and weights renormalized.
 
