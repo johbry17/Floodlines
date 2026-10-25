@@ -108,7 +108,7 @@ _Risk map rescaled to show deviation from the Vermont statewide average rather t
 _Reactive benchmark layer showing where insured losses occurred vs. where modeled risk is highest_
 
 ![Church Waterline](./resources/images/church_waterline.png)  
-_A visual metaphor for the central question explored in Floodlines: when institutions measure risk through past disasters, future floods may arrive above the last high-water mark. Illustration: AI-generated._
+_A visual metaphor for the central question explored in Floodlines: when institutions measure risk through past disasters, future floods may arrive above the last high-water mark._
 <!-- _A visual metaphor for reactive flood planning and the geography of institutional memory. Illustration: AI-generated._ -->
 
 ## Data Sources & Preparation
